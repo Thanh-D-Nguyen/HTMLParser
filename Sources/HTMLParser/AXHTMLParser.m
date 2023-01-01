@@ -301,31 +301,29 @@ void end_element_ns(void *user_data,
 }
 
 void warning(void *user_data, const char *msg, ...) {
-//    va_list args;
-//
-//    va_start(args, msg);
-//    NSString *formatString = [NSString stringWithUTF8String:msg];
-//    NSString *warning = [[NSString alloc] initWithFormat:formatString arguments:args];
-//    va_end(args);
-//    NSLog(@"[Warning] %@", warning);
+    va_list args;
+
+    va_start(args, msg);
+    NSString *formatString = [NSString stringWithUTF8String:msg];
+    NSString *warning = [[NSString alloc] initWithFormat:formatString arguments:args];
+    va_end(args);
 }
 
 void error(void *user_data, const char *msg, ...) {
-//    AXHTMLParser *parser = (__bridge AXHTMLParser *)user_data;
-//
-//    va_list args;
-//    va_start(args, msg);
-//    NSString *formatString = [NSString stringWithUTF8String:msg];
-//    NSString *errorDescription = [[NSString alloc] initWithFormat:formatString arguments:args];
-//    va_end(args);
-//    NSLog(@"[Error] %@", errorDescription);
-//    NSMutableDictionary *userInfo = [@{} mutableCopy];
-//    if (errorDescription) {
-//        userInfo[NSLocalizedDescriptionKey] = errorDescription;
-//    }
-//    parser.parserError = [NSError errorWithDomain:AXHTMLErrorDomain code:AXHTMLErrorUndefined userInfo:userInfo];
-//
-//    if (parser.delegateImplementation.errorOccurred) {
-//        [parser.delegate parser:parser parseErrorOccurred:parser.parserError];
-//    }
+    AXHTMLParser *parser = (__bridge AXHTMLParser *)user_data;
+
+    va_list args;
+    va_start(args, msg);
+    NSString *formatString = [NSString stringWithUTF8String:msg];
+    NSString *errorDescription = [[NSString alloc] initWithFormat:formatString arguments:args];
+    va_end(args);
+    NSMutableDictionary *userInfo = [@{} mutableCopy];
+    if (errorDescription) {
+        userInfo[NSLocalizedDescriptionKey] = errorDescription;
+    }
+    parser.parserError = [NSError errorWithDomain:AXHTMLErrorDomain code:AXHTMLErrorUndefined userInfo:userInfo];
+
+    if (parser.delegateImplementation.errorOccurred) {
+        [parser.delegate parser:parser parseErrorOccurred:parser.parserError];
+    }
 }
